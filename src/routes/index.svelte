@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import Year from "../components/Year/Year.svelte";
+  import Header from "../components/Header/Header.svelte";
+  import Month from "../components/Month/Month.svelte";
+  import LineDivider from "../components/LineDivider/LineDivider.svelte";
+</script>
+
+<Header />
+<LineDivider />
+<Year year={2022} />
+<Month month="June" />
