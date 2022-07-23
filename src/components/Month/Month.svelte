@@ -9,4 +9,4 @@
   }
 </style>
 
-<h3 class="month">{month} 2022</h3>
+<h3 class="month">{month}</h3>

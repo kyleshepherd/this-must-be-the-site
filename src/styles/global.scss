@@ -13,17 +13,12 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   color: $text;
-  font-size: 14px;
   line-height: 1.5;
+  font-size: 16px;
   margin: 0;
   padding: 0;
   background-color: $bg;
-}
-
-@include breakpoint(sm) {
-  body {
-    font-size: 16px;
-  }
+  font-weight: 500;
 }
 
 h1,
