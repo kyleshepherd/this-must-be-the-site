@@ -1,18 +1,12 @@
 <script lang="ts">
-  export let picture: string;
-  export let location: string;
-  export let time: string;
-  export let caption: string = "";
+  import type { PictureData } from "src/data/pictures";
+
+  export let picture: PictureData;
 </script>
 
 <style lang="scss">
   .picture {
-    max-width: 350px;
-    margin: 0.25rem auto;
     text-align: center;
-    @include breakpoint(md) {
-      max-width: 500px;
-    }
     &--img {
       width: 100%;
       border-radius: 25px;
@@ -25,21 +19,30 @@
       margin: 0.25rem 0 0;
     }
     &--details {
-      margin: 0 0 0.5rem;
+      margin: 0.5rem 0 0;
     }
   }
 </style>
 
 <div class="picture">
+  <img class="picture--img" src="/img/{picture.picture}" alt="" />
   <div class="picture--details">
     <p class="picture--loctime">
-      {location} - {time}
+      {#if picture.locationLink}
+        <a href={picture.locationLink} target="_blank">
+          {picture.location}
+        </a>
+      {:else}
+        {picture.location}
+      {/if}
+      {#if picture.time}
+        - {picture.time}
+      {/if}
     </p>
-    {#if caption}
+    {#if picture.caption}
       <p class="picture--caption">
-        {caption}
+        {picture.caption}
       </p>
     {/if}
   </div>
-  <img class="picture--img" src="/img/{picture}" alt="" />
 </div>

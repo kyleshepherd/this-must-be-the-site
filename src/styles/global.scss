@@ -50,3 +50,17 @@ code {
   padding: 0.2em 0.4em;
   border-radius: 2px;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+  transform: translateY(-50%);
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+.swiper-pagination-bullets {
+  bottom: 40px !important;
+}
