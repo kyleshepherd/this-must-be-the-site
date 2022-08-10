@@ -1,6 +1,5 @@
 <script lang="ts">
   import Year from "../components/Year/Year.svelte";
-  import Header from "../components/Header/Header.svelte";
   import Month from "../components/Month/Month.svelte";
   import LineDivider from "../components/LineDivider/LineDivider.svelte";
   import Day from "../components/Day/Day.svelte";
@@ -15,15 +14,14 @@
   // console.log(currentMonth);
 </script>
 
-<Header />
-<div class="pictures">
+<div>
   {#each years as year}
-    <div class="picture--year">
+    <div>
       <LineDivider />
       <Year year={year.year} />
       <LineDivider />
       {#each year.months as month}
-        <div class="picture--month">
+        <div>
           <Month month={month.month.toString()} />
           {#each month.days as day}
             <LineDivider small />

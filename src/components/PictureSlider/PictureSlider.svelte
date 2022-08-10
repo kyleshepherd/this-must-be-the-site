@@ -10,17 +10,7 @@
   export let pictures: PictureData[];
 </script>
 
-<style lang="scss">
-  .picture-slider {
-    max-width: 350px;
-    margin: 0.25rem auto;
-    @include breakpoint(md) {
-      max-width: 500px;
-    }
-  }
-</style>
-
-<div class="picture-slider">
+<div class="max-w-sm my-1 mx-auto md:max-w-lg">
   <Swiper
     slidesPerView={1}
     modules={[Navigation, Pagination]}
@@ -30,7 +20,7 @@
   >
     {#each pictures as picture}
       <SwiperSlide>
-        <div class="picture-slider--slide">
+        <div>
           <Picture {picture} />
         </div>
       </SwiperSlide>

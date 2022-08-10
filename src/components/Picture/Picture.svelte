@@ -4,32 +4,16 @@
   export let picture: PictureData;
 </script>
 
-<style lang="scss">
-  .picture {
-    text-align: center;
-    &--img {
-      width: 100%;
-      border-radius: 25px;
-      box-shadow: 0px 3px 10px 2px rgba(0, 0, 0, 0.15);
-    }
-    &--loctime {
-      margin: 0;
-    }
-    &--caption {
-      margin: 0.25rem 0 0;
-    }
-    &--details {
-      margin: 0.5rem 0 0;
-    }
-  }
-</style>
-
-<div class="picture">
-  <img class="picture--img" src="/img/{picture.picture}" alt="" />
-  <div class="picture--details">
-    <p class="picture--loctime">
+<div class="text-center">
+  <img
+    class="w-full rounded-3xl shadow-lg shadow-black/15"
+    src="/img/{picture.picture}"
+    alt=""
+  />
+  <div class="mt-2">
+    <p class="m-0">
       {#if picture.locationLink}
-        <a href={picture.locationLink} target="_blank">
+        <a href={picture.locationLink} target="_blank" class="underline">
           {picture.location}
         </a>
       {:else}
@@ -40,7 +24,7 @@
       {/if}
     </p>
     {#if picture.caption}
-      <p class="picture--caption">
+      <p class="mt-1">
         {picture.caption}
       </p>
     {/if}

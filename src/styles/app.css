@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-black tracking-wider;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+  transform: translateY(-50%);
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+.swiper-pagination-bullets {
+  bottom: 40px !important;
+}

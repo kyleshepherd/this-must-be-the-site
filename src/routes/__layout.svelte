@@ -1,17 +1,9 @@
-<style lang="scss">
-  :global {
-    @import "../styles/global.scss";
-  }
+<script lang="ts">
+  import Header from "../components/Header/Header.svelte";
+  import "../styles/app.css";
+</script>
 
-  main {
-    position: relative;
-    max-width: $lg;
-    padding: 2em;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-</style>
-
-<main>
+<main class="max-w-screen-lg p-8 mx-auto">
+  <Header />
   <slot />
 </main>

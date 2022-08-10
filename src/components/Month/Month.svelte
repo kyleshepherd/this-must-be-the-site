@@ -2,11 +2,4 @@
   export let month: string;
 </script>
 
-<style lang="scss">
-  .month {
-    text-align: center;
-    font-size: 1.5rem;
-  }
-</style>
-
-<h3 class="month">{month}</h3>
+<h3 class="text-center text-2xl">{month}</h3>
