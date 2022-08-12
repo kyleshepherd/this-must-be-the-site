@@ -11,6 +11,10 @@
   h6 {
     @apply font-serif font-black tracking-wider;
   }
+
+  input {
+    @apply text-black;
+  }
 }
 
 .swiper-button-prev,

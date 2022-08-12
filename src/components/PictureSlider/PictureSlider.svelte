@@ -10,7 +10,7 @@
   export let pictures: PictureData[];
 </script>
 
-<div class="max-w-sm my-1 mx-auto md:max-w-lg">
+<div class="max-w-sm mx-auto my-1 md:max-w-lg">
   <Swiper
     slidesPerView={1}
     modules={[Navigation, Pagination]}
