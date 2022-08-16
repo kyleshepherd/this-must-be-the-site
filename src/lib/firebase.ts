@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { setCookie } from "./cookie";
+import { account } from "../store/account";
 
 export let app: FirebaseApp;
 export let db: Firestore;
@@ -33,8 +34,7 @@ export const signIn = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       const user = userCredential.user;
-      console.log(user);
-      console.log(auth);
+      //redirect user
     })
     .catch(error => {
       const errorCode = error.code;
@@ -50,10 +50,15 @@ const listenForAuthChanges = () => {
     auth,
     async user => {
       if (user) {
-        console.log(user);
         setCookie("account", user.uid);
+        account.set({
+          email: user.email || null,
+          name: user.displayName || null,
+          uid: user.uid,
+        });
       } else {
         setCookie("account", "");
+        account.set(null);
       }
     },
     err => console.error(err.message),

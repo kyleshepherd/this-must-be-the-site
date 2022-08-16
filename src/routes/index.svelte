@@ -6,21 +6,14 @@
   import { years } from "../data/pictures";
   import { Month as MonthEnum } from "../data/pictures";
   import PictureSlider from "../components/PictureSlider/PictureSlider.svelte";
-  import { getAuth, signOut } from "firebase/auth";
 
   // let currentMonth: MonthEnum;
   // const date = new Date();
   // const month = date.toLocaleString("default", { month: "long" });
   // currentMonth = MonthEnum[month as keyof typeof MonthEnum];
   // console.log(currentMonth);
-
-  const logOut = () => {
-    const auth = getAuth();
-    signOut(auth);
-  };
 </script>
 
-<button on:click={logOut}>Log Out</button>
 <div>
   {#each years as year}
     <div>
