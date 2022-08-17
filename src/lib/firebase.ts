@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { setCookie } from "./cookie";
 import { account } from "../store/account";
+import { goto } from "$app/navigation";
 
 export let app: FirebaseApp;
 export let db: Firestore;
@@ -32,9 +33,8 @@ export const initialiseFirebase = async () => {
 export const signIn = (email: string, password: string) => {
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-      //redirect user
+    .then(() => {
+      goto("/upload");
     })
     .catch(error => {
       const errorCode = error.code;

@@ -1,14 +1,16 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { getAuth, signOut } from "firebase/auth";
   import { account } from "../../store/account";
 
   const logOut = () => {
     const auth = getAuth();
     signOut(auth);
+    goto("/");
   };
 </script>
 
-<div class="flex justify-between">
+<div class="flex justify-between items-center">
   {#if $account}
     <button on:click={logOut}>
       <span class="material-symbols-outlined">logout</span>
