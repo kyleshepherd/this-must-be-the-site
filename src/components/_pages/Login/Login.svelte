@@ -1,5 +1,6 @@
 <script lang="ts">
   import { signIn } from "$lib/firebase";
+  import Button from "../../Button/Button.svelte";
 
   let email: string;
   let password: string;
@@ -25,6 +26,6 @@
       bind:value={password}
       placeholder="Password"
     />
-    <button class="p-2 border border-white" type="submit">Login</button>
+    <Button label="Login" submit />
   </form>
 </div>

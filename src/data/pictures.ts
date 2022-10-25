@@ -1,9 +1,9 @@
 export type PictureData = {
   picture: string;
   location: string;
-  locationLink?: string;
+  locationLink: string;
   time: string;
-  caption?: string;
+  caption: string;
 };
 
 export type DayData = {
@@ -51,11 +51,14 @@ export const years: YearData[] = [
                 location: "God's Own Junkyard, Walthamstow",
                 locationLink: "https://goo.gl/maps/8S3mMvFP6mGXB7JMA",
                 time: "13:21",
+                caption: "",
               },
               {
                 picture: "pictures/goj.jpg",
                 location: "Tesstt",
                 time: "13:21",
+                caption: "",
+                locationLink: "",
               },
             ],
           },
