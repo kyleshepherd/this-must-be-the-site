@@ -1,5 +1,6 @@
 import type { FirebaseApp, FirebaseOptions } from "firebase/app";
-import type { Firestore } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { addDoc, collection, type Firestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -10,9 +11,10 @@ import {
 import { setCookie } from "./cookie";
 import { account } from "../store/account";
 import { goto } from "$app/navigation";
+import type { PictureData, PictureUploadData } from "src/data/pictures";
 
-export let app: FirebaseApp;
-export let db: Firestore;
+let app: FirebaseApp;
+let db: Firestore;
 
 export const initialiseFirebase = async () => {
   if (!app) {
@@ -25,7 +27,6 @@ export const initialiseFirebase = async () => {
       storageBucket: import.meta.env.VITE_FB_STORAGE_BUCKET,
     };
     app = initializeApp(options);
-    db = getFirestore(app);
     listenForAuthChanges();
   }
 };
@@ -63,4 +64,29 @@ const listenForAuthChanges = () => {
     },
     err => console.error(err.message),
   );
+};
+
+export const addDate = async (date: string, pictures: PictureUploadData[]) => {
+  db = getFirestore();
+  const pics: PictureData[] = [];
+  for (const pic of pictures) {
+    const picUrl = await uploadPicture(pic);
+    pics.push({ ...pic, picture: picUrl });
+  }
+
+  await addDoc(collection(db, "pics"), {
+    date,
+    pictures: pics,
+  });
+};
+
+const uploadPicture = async (picture: PictureUploadData): Promise<string> => {
+  if (picture.picture === undefined || picture.picture.length < 1) {
+    return "";
+  }
+  const storage = getStorage();
+  const picRef = ref(storage, picture.picture[0].name);
+  const snapshot = await uploadBytes(picRef, picture.picture[0]);
+  const url = await getDownloadURL(snapshot.ref);
+  return url;
 };

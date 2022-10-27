@@ -1,3 +1,11 @@
+export type PictureUploadData = {
+  picture: FileList | undefined;
+  location: string;
+  locationLink: string;
+  time: string;
+  caption: string;
+};
+
 export type PictureData = {
   picture: string;
   location: string;

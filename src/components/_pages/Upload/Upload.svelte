@@ -1,17 +1,23 @@
 <script lang="ts">
   import InputField from "../../InputField/InputField.svelte";
-  import type { PictureData } from "src/data/pictures";
+  import type { PictureUploadData } from "src/data/pictures";
   import PictureForm from "../../PictureForm/PictureForm.svelte";
   import Button from "../../Button/Button.svelte";
+  import { addDate } from "$lib/firebase";
 
   let date: string;
-  let pictures: PictureData[] = [
-    { location: "", picture: "", time: "", caption: "", locationLink: "" },
+  let pictures: PictureUploadData[] = [
+    {
+      location: "",
+      picture: undefined,
+      time: "",
+      caption: "",
+      locationLink: "",
+    },
   ];
 
   const upload = () => {
-    console.log(date);
-    console.log(pictures);
+    addDate(date, pictures);
   };
 
   const addPicture = () => {
@@ -19,7 +25,7 @@
       ...pictures,
       {
         location: "",
-        picture: "",
+        picture: undefined,
         time: "",
         caption: "",
         locationLink: "",
@@ -38,6 +44,7 @@
   };
 </script>
 
+<img src="IMG_6139.HEIC" />
 <div class="max-w-screen-sm mx-auto mt-8">
   <h2 class="text-3xl text-center">Upload</h2>
   <form on:submit|preventDefault={upload} class="mt-4">

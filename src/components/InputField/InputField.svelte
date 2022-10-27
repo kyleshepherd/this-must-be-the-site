@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let value: string;
+  export let value: string = "";
+  export let files: FileList | undefined = undefined;
   export let required: boolean = false;
   export let label: string = "";
   export let type: string = "text";
@@ -21,7 +22,7 @@
     <input
       type="file"
       accept="image/*, .heic"
-      bind:value
+      bind:files
       {required}
       class="text-white"
     />

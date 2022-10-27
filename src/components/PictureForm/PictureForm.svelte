@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { PictureData } from "src/data/pictures";
+  import type { PictureUploadData } from "src/data/pictures";
   import { createEventDispatcher } from "svelte";
   import InputField from "../InputField/InputField.svelte";
 
-  export let picture: PictureData;
+  export let picture: PictureUploadData;
   export let canRemove: boolean = true;
 
   const dispatch = createEventDispatcher();
@@ -23,7 +23,7 @@
   {/if}
   <InputField
     type="image"
-    bind:value={picture.picture}
+    bind:files={picture.picture}
     label="Picture"
     required
   />
