@@ -1,6 +1,13 @@
 import type { FirebaseApp, FirebaseOptions } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { addDoc, collection, type Firestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  type Firestore,
+} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -11,7 +18,14 @@ import {
 import { setCookie } from "./cookie";
 import { account } from "../store/account";
 import { goto } from "$app/navigation";
-import type { PictureData, PictureUploadData } from "src/data/pictures";
+import {
+  Month,
+  type DateData,
+  type MonthData,
+  type PictureData,
+  type PictureUploadData,
+  type YearData,
+} from "../data/pictures";
 
 let app: FirebaseApp;
 let db: Firestore;
@@ -84,9 +98,82 @@ const uploadPicture = async (picture: PictureUploadData): Promise<string> => {
   if (picture.picture === undefined || picture.picture.length < 1) {
     return "";
   }
+  const fileName = String(new Date().toISOString()) + picture.picture[0].name;
   const storage = getStorage();
-  const picRef = ref(storage, picture.picture[0].name);
-  const snapshot = await uploadBytes(picRef, picture.picture[0]);
-  const url = await getDownloadURL(snapshot.ref);
+  const picRef = ref(storage, fileName);
+  await uploadBytes(picRef, picture.picture[0]);
+  return fileName;
+};
+
+export const getImgURL = async (fileName: string): Promise<string> => {
+  const storage = getStorage(app, "tmbts-dev-resized");
+  const url = await getDownloadURL(ref(storage, fileName));
   return url;
+};
+
+export const getPictures = async (): Promise<YearData[]> => {
+  const years: YearData[] = [];
+  const dates: DateData[] = [];
+  db = getFirestore();
+  const storage = getStorage(app, "tmbts-dev-resized");
+  const picsRef = collection(db, "pics");
+  const q = query(picsRef, orderBy("date", "desc"));
+  const querySnapshot = await getDocs(q);
+
+  querySnapshot.forEach(doc => {
+    const docData = doc.data();
+    dates.push({
+      date: docData.date,
+      pictures: docData.pictures,
+    });
+  });
+
+  for (const date of dates) {
+    for (const pic of date.pictures) {
+      pic.picture = await getDownloadURL(ref(storage, pic.picture));
+    }
+  }
+
+  if (dates.length < 1) {
+    return [];
+  }
+  let currentYear: YearData = {
+    year: new Date(dates[0].date).getFullYear(),
+    months: [],
+  };
+  let currentMonth: MonthData = {
+    dates: [],
+    month: Object.values(Month)[new Date(dates[0].date).getMonth()],
+  };
+  dates.forEach(async date => {
+    const year = new Date(date.date).getFullYear();
+    const month = Object.values(Month)[new Date(date.date).getMonth()];
+    if (!currentYear || currentYear.year !== year) {
+      if (currentYear) {
+        years.push(currentYear);
+      }
+      currentYear = {
+        year,
+        months: [],
+      };
+    }
+    if (!currentMonth || currentMonth.month !== month) {
+      if (currentMonth) {
+        currentYear.months.push(currentMonth);
+      }
+      currentMonth = {
+        month,
+        dates: [],
+      };
+    }
+    currentMonth.dates.push(date);
+  });
+  if (currentYear) {
+    if (currentMonth) {
+      currentYear.months.push(currentMonth);
+    }
+    years.push(currentYear);
+  }
+
+  return years;
 };

@@ -14,14 +14,14 @@ export type PictureData = {
   caption: string;
 };
 
-export type DayData = {
-  day: string;
+export type DateData = {
+  date: string;
   pictures: PictureData[];
 };
 
 export type MonthData = {
   month: Month;
-  days: DayData[];
+  dates: DateData[];
 };
 
 export type YearData = {
@@ -43,35 +43,3 @@ export enum Month {
   November = "November",
   December = "December",
 }
-
-export const years: YearData[] = [
-  {
-    year: 2022,
-    months: [
-      {
-        month: Month.July,
-        days: [
-          {
-            day: "21st",
-            pictures: [
-              {
-                picture: "pictures/goj.jpg",
-                location: "God's Own Junkyard, Walthamstow",
-                locationLink: "https://goo.gl/maps/8S3mMvFP6mGXB7JMA",
-                time: "13:21",
-                caption: "",
-              },
-              {
-                picture: "pictures/goj.jpg",
-                location: "Tesstt",
-                time: "13:21",
-                caption: "",
-                locationLink: "",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-];

@@ -7,7 +7,7 @@
 <div class="text-center">
   <img
     class="w-full rounded-3xl shadow-lg shadow-black/15"
-    src="/img/{picture.picture}"
+    src={picture.picture}
     alt=""
   />
   <div class="mt-2">

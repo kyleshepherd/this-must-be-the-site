@@ -3,33 +3,36 @@
   import Month from "../components/Month/Month.svelte";
   import LineDivider from "../components/LineDivider/LineDivider.svelte";
   import Day from "../components/Day/Day.svelte";
-  import { years } from "../data/pictures";
-  import { Month as MonthEnum } from "../data/pictures";
+  import type { YearData } from "../data/pictures";
   import PictureSlider from "../components/PictureSlider/PictureSlider.svelte";
+  import { onMount } from "svelte";
+  import { getPictures } from "$lib/firebase";
 
-  // let currentMonth: MonthEnum;
-  // const date = new Date();
-  // const month = date.toLocaleString("default", { month: "long" });
-  // currentMonth = MonthEnum[month as keyof typeof MonthEnum];
-  // console.log(currentMonth);
+  let years: YearData[];
+
+  onMount(async () => {
+    years = await getPictures();
+  });
 </script>
 
 <div>
-  {#each years as year}
-    <div>
-      <LineDivider />
-      <Year year={year.year} />
-      <LineDivider />
-      {#each year.months as month}
-        <div>
-          <Month month={month.month.toString()} />
-          {#each month.days as day}
-            <LineDivider small />
-            <Day day={day.day} />
-            <PictureSlider pictures={day.pictures} />
-          {/each}
-        </div>
-      {/each}
-    </div>
-  {/each}
+  {#if years}
+    {#each years as year}
+      <div>
+        <LineDivider />
+        <Year year={year.year} />
+        <LineDivider />
+        {#each year.months as month}
+          <div>
+            <Month month={month.month.toString()} />
+            {#each month.dates as date}
+              <LineDivider small />
+              <Day day={date.date} />
+              <PictureSlider pictures={date.pictures} />
+            {/each}
+          </div>
+        {/each}
+      </div>
+    {/each}
+  {/if}
 </div>

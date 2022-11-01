@@ -44,7 +44,6 @@
   };
 </script>
 
-<img src="IMG_6139.HEIC" />
 <div class="max-w-screen-sm mx-auto mt-8">
   <h2 class="text-3xl text-center">Upload</h2>
   <form on:submit|preventDefault={upload} class="mt-4">

@@ -21,7 +21,7 @@
     {label}
     <input
       type="file"
-      accept="image/*, .heic"
+      accept="image/*"
       bind:files
       {required}
       class="text-white"
