@@ -106,7 +106,7 @@ const uploadPicture = async (picture: PictureUploadData): Promise<string> => {
 };
 
 export const getImgURL = async (fileName: string): Promise<string> => {
-  const storage = getStorage(app, "tmbts-dev-resized");
+  const storage = getStorage(app, import.meta.env.VITE_FB_RESIZE_BUCKET);
   const url = await getDownloadURL(ref(storage, fileName));
   return url;
 };
@@ -115,7 +115,7 @@ export const getPictures = async (): Promise<YearData[]> => {
   const years: YearData[] = [];
   const dates: DateData[] = [];
   db = getFirestore();
-  const storage = getStorage(app, "tmbts-dev-resized");
+  const storage = getStorage(app, import.meta.env.VITE_FB_RESIZE_BUCKET);
   const picsRef = collection(db, "pics");
   const q = query(picsRef, orderBy("date", "desc"));
   const querySnapshot = await getDocs(q);

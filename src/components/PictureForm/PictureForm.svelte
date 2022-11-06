@@ -5,6 +5,7 @@
 
   export let picture: PictureUploadData;
   export let canRemove: boolean = true;
+  export let disabled: boolean = false;
 
   const dispatch = createEventDispatcher();
 
@@ -17,6 +18,7 @@
   {#if canRemove}
     <button
       type="button"
+      {disabled}
       class="absolute text-lg top-2 right-4"
       on:click={removeClick}>&#10006;</button
     >
@@ -26,13 +28,26 @@
     bind:files={picture.picture}
     label="Picture"
     required
+    {disabled}
   />
-  <InputField type="time" bind:value={picture.time} label="Time" required />
-  <InputField bind:value={picture.caption} label="Caption" />
-  <InputField bind:value={picture.location} label="Location" required />
+  <InputField
+    type="time"
+    bind:value={picture.time}
+    label="Time"
+    required
+    {disabled}
+  />
+  <InputField bind:value={picture.caption} label="Caption" {disabled} />
+  <InputField
+    bind:value={picture.location}
+    label="Location"
+    required
+    {disabled}
+  />
   <InputField
     type="url"
     bind:value={picture.locationLink}
     label="Location URL"
+    {disabled}
   />
 </div>
