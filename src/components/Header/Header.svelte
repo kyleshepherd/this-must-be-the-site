@@ -16,7 +16,7 @@
       <span class="material-symbols-outlined">logout</span>
     </button>
   {:else}
-    <a href="/login">
+    <a href="/upload">
       <span class="material-symbols-outlined">login</span>
     </a>
   {/if}
