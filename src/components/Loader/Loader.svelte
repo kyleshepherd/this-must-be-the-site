@@ -1,5 +1,11 @@
+<script lang="ts">
+  export let inline: boolean = false;
+</script>
+
 <div
-  class="bg-opacity-80 fixed inset-0 bg-black flex justify-center items-center"
+  class="{inline
+    ? 'my-8'
+    : 'bg-opacity-80 fixed inset-0 bg-black'}  flex justify-center items-center"
 >
   <div role="status">
     <svg

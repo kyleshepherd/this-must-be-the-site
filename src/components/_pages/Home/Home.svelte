@@ -18,10 +18,10 @@
       {#each year.months as month}
         <div>
           <Month month={month.month.toString()} />
-          {#each month.days as day}
+          {#each month.dates as date}
             <LineDivider small />
-            <Day day={day.day} />
-            <PictureSlider pictures={day.pictures} />
+            <Day day={date.date} />
+            <PictureSlider pictures={date.pictures} />
           {/each}
         </div>
       {/each}
