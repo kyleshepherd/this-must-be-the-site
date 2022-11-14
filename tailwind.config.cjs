@@ -18,7 +18,11 @@ module.exports = {
       sans: ["Poppins", "sans-serif"],
       serif: ["Source\\ Serif\\ Pro", "serif"],
     },
-    extend: {},
+    extend: {
+      height: {
+        img: "612px",
+      },
+    },
   },
   plugins: [],
 };

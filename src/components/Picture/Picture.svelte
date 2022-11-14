@@ -2,13 +2,23 @@
   import type { PictureData } from "src/data/pictures";
 
   export let picture: PictureData;
+
+  let loaded = false;
+
+  $: console.log(loaded);
 </script>
 
 <div class="text-center">
+  {#if !loaded}
+    <div
+      class="w-full h-img bg-black bg-opacity-20 rounded-3xl shadow-lg shadow-black/15"
+    />
+  {/if}
   <img
     class="w-full rounded-3xl shadow-lg shadow-black/15"
     src={picture.picture}
     alt=""
+    on:load={() => (loaded = true)}
   />
   <div class="mt-2">
     <p class="m-0">
