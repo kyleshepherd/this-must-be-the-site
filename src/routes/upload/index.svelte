@@ -1,21 +1,15 @@
-<script lang="ts" context="module">
-  import type { Load } from "@sveltejs/kit";
+<script lang="ts">
   import { account } from "../../store/account";
   import { get } from "svelte/store";
-
-  export const load: Load = async function load() {
-    if (typeof window !== "undefined") {
-      if (get(account) === null) {
-        goto("/login");
-      }
-    }
-    return {};
-  };
-</script>
-
-<script lang="ts">
   import Upload from "../../components/_pages/Upload/Upload.svelte";
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    if (get(account) === null) {
+      goto("/login");
+    }
+  });
 </script>
 
 <Upload />
