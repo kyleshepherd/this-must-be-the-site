@@ -149,6 +149,11 @@ export const getPictures = async (): Promise<YearData[]> => {
     const year = new Date(date.date).getFullYear();
     const month = Object.values(Month)[new Date(date.date).getMonth()];
     if (!currentYear || currentYear.year !== year) {
+      currentYear.months.push(currentMonth);
+      currentMonth = {
+        month,
+        dates: [],
+      };
       if (currentYear) {
         years.push(currentYear);
       }

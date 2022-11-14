@@ -4,8 +4,6 @@
   export let picture: PictureData;
 
   let loaded = false;
-
-  $: console.log(loaded);
 </script>
 
 <div class="text-center">
