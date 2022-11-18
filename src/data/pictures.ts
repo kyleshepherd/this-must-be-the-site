@@ -7,11 +7,11 @@ export type PictureUploadData = {
 };
 
 export type PictureData = {
-  picture: string;
+  imageUrl: string;
   location: string;
-  locationLink: string;
+  locationUrl?: string;
   time: string;
-  caption: string;
+  caption?: string;
 };
 
 export type DateData = {

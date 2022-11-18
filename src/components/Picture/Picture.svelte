@@ -3,32 +3,34 @@
 
   export let picture: PictureData;
 
-  let loaded = false;
+  $: time = new Date(picture.time);
 </script>
 
 <div class="text-center">
-  {#if !loaded}
-    <div
-      class="w-full h-img bg-black bg-opacity-20 rounded-3xl shadow-lg shadow-black/15"
-    />
-  {/if}
   <img
     class="w-full rounded-3xl shadow-lg shadow-black/15"
-    src={picture.picture}
+    src={`${picture.imageUrl}?w=600`}
+    loading="lazy"
     alt=""
-    on:load={() => (loaded = true)}
   />
   <div class="mt-2">
     <p class="m-0">
-      {#if picture.locationLink}
-        <a href={picture.locationLink} target="_blank" class="underline">
+      {#if picture.locationUrl}
+        <a
+          href={picture.locationUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="underline"
+        >
           {picture.location}
         </a>
       {:else}
         {picture.location}
       {/if}
       {#if picture.time}
-        - {picture.time}
+        - {`${("0" + time.getHours().toLocaleString()).slice(
+          -2,
+        )}:${time.getMinutes()}`}
       {/if}
     </p>
     {#if picture.caption}
