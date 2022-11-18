@@ -4,12 +4,14 @@
   export let picture: PictureData;
 
   $: time = new Date(picture.time);
+
+  $: ratio = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 </script>
 
 <div class="text-center">
   <img
     class="w-full rounded-3xl shadow-lg shadow-black/15"
-    src={`${picture.imageUrl}?w=600`}
+    src={`${picture.imageUrl}?w=600&auto=format&dpr=${ratio}`}
     loading="lazy"
     alt=""
   />
