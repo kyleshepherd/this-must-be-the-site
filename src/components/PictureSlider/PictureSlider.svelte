@@ -15,7 +15,7 @@
     slidesPerView={1}
     modules={[Navigation, Pagination]}
     navigation
-    pagination={{ clickable: true }}
+    pagination={{ clickable: true, horizontalClass: "mb-6" }}
     spaceBetween={10}
   >
     {#each pictures as picture}
