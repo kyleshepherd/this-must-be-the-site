@@ -5,6 +5,7 @@ import { error } from "@sveltejs/kit";
 export const load = async () => {
   let loading = true;
   const entries = await getEntries();
+  console.log(entries);
 
   if (entries) {
     const sortedEntries = sortIntoYears(entries);

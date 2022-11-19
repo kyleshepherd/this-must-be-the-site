@@ -31,7 +31,7 @@ export const getEntries = async () => {
 
   return await client.fetch(`*[_type == "entry"] | order(date desc){
 		date,
-		pictures[] | order(time asc) {
+		pictures[] | order(image.asset->metadata.exif.DateTimeOriginal asc) {
 			"imageUrl": image.asset->url,
 			caption,
 			location,
