@@ -30,9 +30,9 @@
         {picture.location}
       {/if}
       {#if picture.time}
-        - {`${("0" + time.getHours().toLocaleString()).slice(
-          -2,
-        )}:${time.getMinutes()}`}
+        - {`${("0" + time.getHours().toLocaleString()).slice(-2)}:${(
+          "0" + time.getMinutes().toLocaleString()
+        ).slice(-2)}`}
       {/if}
     </p>
     {#if picture.caption}

@@ -33,10 +33,11 @@ export const getEntries = async () => {
 		date,
 		pictures[] | order(time asc) {
 			"imageUrl": image.asset->url,
-			time,
 			caption,
 			location,
-			locationUrl
+			locationUrl,
+      "time": image.asset->metadata.exif.DateTimeOriginal,
+      "picLocation": image.asset->metadata.location,
 		}
 	}`);
 };
