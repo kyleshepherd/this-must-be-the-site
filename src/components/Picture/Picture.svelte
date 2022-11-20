@@ -3,8 +3,6 @@
 
   export let picture: PictureData;
 
-  $: time = new Date(picture.time);
-
   $: ratio = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 </script>
 
@@ -30,9 +28,7 @@
         {picture.location}
       {/if}
       {#if picture.time}
-        - {`${("0" + time.getHours().toLocaleString()).slice(-2)}:${(
-          "0" + time.getMinutes().toLocaleString()
-        ).slice(-2)}`}
+        - {picture.time}
       {/if}
     </p>
     {#if picture.caption}

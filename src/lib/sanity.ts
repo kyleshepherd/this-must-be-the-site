@@ -31,13 +31,12 @@ export const getEntries = async () => {
 
   return await client.fetch(`*[_type == "entry"] | order(date desc){
 		date,
-		pictures[] | order(image.asset->metadata.exif.DateTimeOriginal asc) {
+		pictures[] | order(time asc) {
 			"imageUrl": image.asset->url,
 			caption,
 			location,
 			locationUrl,
-      "time": image.asset->metadata.exif.DateTimeOriginal,
-      "picLocation": image.asset->metadata.location,
+      time,
 		}
 	}`);
 };
