@@ -17,6 +17,7 @@
     navigation
     pagination={{ clickable: true, horizontalClass: "mb-6" }}
     spaceBetween={10}
+    autoHeight
   >
     {#each pictures as picture}
       <SwiperSlide>
